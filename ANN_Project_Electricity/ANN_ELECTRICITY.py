@@ -22,12 +22,14 @@ X_train=sc.fit_transform(X_train)
 X_test=sc.transform(X_test)
 print(X_train)
 print(X_test)
-
+# for regression point of view always use mse (mean_squared_error)
 # building the ann
 ann=tf.keras.models.Sequential()
 ann.add(tf.keras.layers.Dense(units=6,activation='relu'))
 ann.add(tf.keras.layers.Dense(units=6,activation='relu'))
-ann.add(tf.keras.layers.Dense(units=1,activation='sigmoid'))
-ann.compile(optimizer='adam',loss="categorical_crossentropy",metrics=['accuracy'])
+# as we will not use probability so we will not use sigmoid as activation in the third layer
+ann.add(tf.keras.layers.Dense(units=1))
+ann.compile(optimizer='adam',loss="mean_squared_error",metrics=['accuracy'])
 ann.fit(X_train,Y_train,batch_size=32,epochs=100)
-print(ann.predict(X_test))
+y_pred=ann.predict(X_test)
+ann.save('model.h5')
