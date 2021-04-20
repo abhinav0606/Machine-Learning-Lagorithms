@@ -1,3 +1,4 @@
+# https://freefrontend.com/bootstrap-payment-forms/
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -27,7 +28,6 @@ ann.add(tf.keras.layers.Dense(units=6,activation='relu'))
 ann.add(tf.keras.layers.Dense(units=6,activation='relu'))
 # final output
 ann.add(tf.keras.layers.Dense(units=1,activation='sigmoid'))
-
 ann.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
 ann.fit(X_train,Y_train,batch_size=32,epochs=100)
 print((ann.predict(sc.transform([[1, 0, 0, 600, 1, 40, 3, 60000, 2, 1, 1, 50000]])))>0.5)
